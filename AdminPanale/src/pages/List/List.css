@@ -1,0 +1,107 @@
+.list-add-flex-col {
+    padding: 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.list-table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse; /* Important for table layout */
+}
+
+.list-table-format {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr 0.9fr 0.9fr 0.4fr; /* Default grid columns */
+    align-items: center;
+    gap: 20px; /* Reduced gap for better spacing */
+    padding: 12px 15px;
+    border-bottom: 1px solid #cacaca;
+    font-size: 14px;
+    background-color: #fff;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.list-table-format.title {
+    grid-template-columns: 0.7fr 0.7fr 0.9fr 1fr 0.4fr; /* Adjusted title columns */
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.list-table-format img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: block; /* Prevents small gap below image in some browsers */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+.list-table-format p {
+    margin: 0;
+    overflow: hidden; /* Prevent text from overflowing */
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflow */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.list-table-format:hover {
+    background-color: #f9f9f9;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 5px; /* Space between buttons */
+    justify-content: center; /* Center buttons horizontally */
+}
+
+.action-buttons button {
+    padding: 5px 10px; /* Adjust button padding */
+    font-size: 12px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.search-container input {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 14px; /* Increased font size */
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-container input::placeholder {
+    color: #999;
+}
+
+/* Media query - Consolidated and improved */
+@media (max-width: 768px) {
+    .list-table-format {
+        grid-template-columns: 1fr 1.5fr 1fr 1fr 0.7fr; /* Adjusted for smaller screens */
+        font-size: 12px;
+        gap: 10px; /* Reduced gap on smaller screens */
+    }
+
+    .list-table-format img {
+        width: 60px; /* Slightly larger image on smaller screens */
+        height: 60px;
+    }
+    .action-buttons button {
+        padding: 3px 6px; /* Adjust button padding */
+        font-size: 10px;
+    }
+}

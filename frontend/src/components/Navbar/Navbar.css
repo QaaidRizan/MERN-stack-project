@@ -1,0 +1,152 @@
+.navbar{
+    padding: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo{
+    width: 150px;
+}
+
+.navbar-menu{ 
+  display: flex;
+   list-style: none;
+  gap: 20px;
+    color: #49557e;
+  font-size: 18px;
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.navbar button{
+    background: transparent;
+    color: #49557e;
+    border: 1px solid tomato;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ;
+}
+
+.navbar button:hover{
+    background-color: #fff4f2;
+}
+
+.navbar .active{
+    padding-bottom: 2px;
+    border-bottom: 2px solid #49557e;
+
+}
+
+.navbar li{
+    cursor: pointer;
+}
+
+ .navbar-search-icon{
+    position: relative;
+ }
+
+ .navbar-search-icon .dot{
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: tomato;
+    border-radius: 5px;
+    top: 8px;
+    right: -8px;
+ }
+
+ @media (max-with:1050px){
+    .navbar .logo{
+        width:140px;
+    }
+    .navbar-menu{
+        gap: 20px;
+        font-size: 17px;
+
+    }
+    .navbar-right{
+        gap: 30px;
+
+    }
+    .navbar-right img{
+        width: 22px;
+    }
+    .navbar-right button{
+        padding: 8px 25px;
+
+    }
+ }
+ @media (max-with:900px){
+    .navbar .logo{
+        width:120px;
+    }
+    .navbar-menu{
+        gap: 15px;
+        font-size: 16px;
+
+    }
+    .navbar-right{
+        gap: 20px;
+
+    }
+    .navbar-right img{
+        width: 20px;
+    }
+    .navbar-right button{
+        padding: 7px 20px;
+        font-size: 15px;
+
+    }
+    .navbar-profile {
+        position: relative; /* Ensure dropdown is positioned correctly */
+      }
+      
+      .nav-profile-dropdown {
+        display: none; /* Initially hidden */
+        position: absolute; /* Position relative to parent */
+        top: 100%; /* Position below the profile icon */
+        right: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .nav-profile-dropdown li {
+        padding: 10px;
+        cursor: pointer;
+      }
+      
+      .nav-profile-dropdown li:hover {
+        background-color: #f0f0f0;
+      }
+      
+      .nav-profile-dropdown hr {
+        margin: 0;
+      }
+      /* Ensure dropdown is hidden by default */
+.nav-profile-dropdown {
+    display: none;
+  }
+  
+  /* Show dropdown when `dropdownOpen` state is true */
+  .nav-profile-dropdown {
+    display: block;
+  }
+  
+ }
+ @media (max-with:750px){
+  
+    .navbar-menu{
+        display: none;
+    }
+
+ }

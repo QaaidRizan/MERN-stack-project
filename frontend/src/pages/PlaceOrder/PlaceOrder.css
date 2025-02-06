@@ -1,0 +1,143 @@
+/* General Styling */
+.place-order {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.place-order h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Product Details */
+.product-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 20px;
+}
+
+.product-image-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-image:hover {
+  transform: scale(1.03);
+}
+
+.product-info {
+  flex: 1;
+  text-align: left;
+}
+
+.product-info h3 {
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.product-info .description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.product-info .price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #e67e22;
+  margin-bottom: 20px;
+}
+
+/* Order Button */
+.order-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: #27ae60;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.order-btn:hover {
+  background: #218c54;
+  transform: translateY(-2px);
+}
+
+/* Loading & Error */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  text-align: center;
+  font-size: 18px;
+  color: #e74c3c;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .place-order {
+    padding: 20px;
+  }
+
+  .product-details {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-info {
+    text-align: center;
+  }
+
+  .product-info h3 {
+    font-size: 22px;
+  }
+
+  .product-info .price {
+    font-size: 20px;
+  }
+}
