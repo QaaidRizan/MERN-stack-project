@@ -13,7 +13,7 @@ const FoodDisplay = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/products");
+        const response = await axios.get("https://food-order-mern-stack-project.onrender.com/api/products");
         if (Array.isArray(response.data.products)) {
           setProducts(response.data.products);
         } else {
