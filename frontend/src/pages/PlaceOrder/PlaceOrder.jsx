@@ -12,7 +12,7 @@ const PlaceOrder = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/products/${id}`);
+        const response = await axios.get(`https://food-order-mern-stack-project.onrender.com/api/products/${id}`);
         if (response.data.success) {
           setProduct(response.data.product);
         } else {
