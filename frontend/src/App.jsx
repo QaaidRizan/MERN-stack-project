@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/products");
+        const response = await axios.get("https://food-order-mern-stack-project.onrender.com/api/products");
         setProducts(response.data.products || []);
       } catch (err) {
         console.error("Error fetching products:", err);
