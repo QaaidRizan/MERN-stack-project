@@ -42,7 +42,7 @@ const FoodDisplay = () => {
               name={item.name}
               description={item.description}
               price={item.price}
-              image={`http://localhost:3000/uploads/${item.image}`}
+              image={`https://food-order-mern-stack-project.onrender.com/uploads/${item.image}`}
             />
           </div>
         ))}
