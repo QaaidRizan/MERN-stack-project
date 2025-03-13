@@ -33,7 +33,7 @@ const FoodDisplay = () => {
 
   return (
     <div className="food-display">
-      <h2>Top Foods Near You</h2>
+      <h2>Top Car Near You</h2>
       <div className="food-display-list">
         {products.map((item) => (
           <div key={item.id || item._id} onClick={() => navigate(`/place-order/${item.id || item._id}`)}>
