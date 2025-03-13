@@ -1,4 +1,3 @@
-
 import { createContext, useEffect, useState } from "react";
 import { food_list } from "../assets/assets";
 
@@ -7,6 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
+  const [backendURL] = useState("https://food-order-mern-stack-project.onrender.com");
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
@@ -46,6 +46,7 @@ const StoreContextProvider = ({ children }) => {
     getTotalCartAmount,
     token,
     setToken,
+    backendURL,  // Add this line
   };
 
   useEffect(() => {
