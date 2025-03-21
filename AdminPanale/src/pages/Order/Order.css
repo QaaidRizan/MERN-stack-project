@@ -1,0 +1,70 @@
+.order-item {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+    align-items: start;
+    gap: 20px; /* Reduced gap for a more compact layout */
+    border: 1px solid #ff6f61; /* Slightly lighter border color */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    padding: 20px; /* Increased padding for better spacing */
+    margin: 20px 0; /* Reduced margin for a more compact layout */
+    background-color: #f9f9f9; /* Light background color for contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-size: 14px;
+    color: #333; /* Darker text color for better readability */
+}
+
+.order-item img {
+    max-width: 50px; /* Consistent image sizing */
+    max-height: 50px;
+    object-fit: cover; /* Maintain aspect ratio */
+    padding: 5px; /* Add some padding around the image */
+}
+
+.order-item-food, .order-item-name {
+    font-weight: 600;
+    margin-bottom: 8px; /* Add spacing between elements */
+    padding: 5px; /* Added padding for better spacing */
+}
+
+.order-item-name {
+    margin-top: 10px; /* Reduced margin for a tighter layout */
+    margin-bottom: 8px;
+    padding: 5px; /* Add padding to the name */
+}
+
+.order-item-address {
+    margin-bottom: 10px;
+    font-size: 12px; /* Slightly smaller font size for address */
+    color: #666; /* Lighter color for address text */
+    padding: 5px; /* Add padding to address */
+}
+
+.order-item select {
+    background-color: #ffe8e4;
+    border: 1px solid #ff6f61; /* Matching border color */
+    border-radius: 4px; /* Rounded corners for select box */
+    width: max(10vw, 140px); /* Adjust width for better fit */
+    padding: 8px; /* Slightly reduced padding */
+    outline: none;
+    font-size: 14px; /* Consistent font size */
+    color: #333; /* Consistent text color */
+    padding: 5px; /* Added padding to select box */
+}
+
+@media (max-width: 1000px) {
+    .order-item {
+        font-size: 12px;
+        grid-template-columns: 0.5fr 2fr 1fr;
+        padding: 15px; /* Adjusted padding for smaller screens */
+    }
+
+    .order-item select {
+        padding: 6px; /* Reduced padding for smaller screens */
+        font-size: 12px;
+    }
+
+    .order-item img {
+        width: 40px; /* Consistent image sizing */
+        height: 40px;
+    }
+}
