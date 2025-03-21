@@ -105,7 +105,7 @@ export default function List() {
     return (
         <div className="list-add-flex-col">
             <ToastContainer />
-            <h1>All Foods List</h1>
+            <h1>All Vehicle List</h1>
             <div className="search-container">
                 <input
                     type="text"

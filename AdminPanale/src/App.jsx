@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './component/navbar/navbar';  // Ensure correct path and capitalization
 import Sidebar from './component/sidebar/sidebar';  // Ensure correct path and capitalization
 import { Routes, Route } from 'react-router-dom';
-import Order from './pages/Order/Order';
+import Order from './pages/Order/order';
 import List from './pages/List/List';
 import Add from './pages/Add/Add';
 import { ToastContainer } from 'react-toastify';
