@@ -33,6 +33,7 @@ const Navbar = ({ setShowLogin }) => {
   return (
     <div className="navbar">
       <Link to="/">
+  
       </Link>
       <ul className="navbar-menu">
         <Link
@@ -47,7 +48,7 @@ const Navbar = ({ setShowLogin }) => {
           onClick={() => setMenu("menu")}
           className={menu === "menu" ? "active" : ""}
         >
-          Menu
+          Top Cars
         </a>
         <a
           href="#footer"
@@ -85,6 +86,7 @@ const Navbar = ({ setShowLogin }) => {
             )}
           </div>
         )}
+        <button onClick={() => window.createChat.toggle()}>Chat</button>
       </div>
     </div>
   );
