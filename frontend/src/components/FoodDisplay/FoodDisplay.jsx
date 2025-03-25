@@ -13,7 +13,7 @@ const FoodDisplay = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://mern-stack-project-ten-mocha.vercel.app/api/products");
+        const response = await axios.get("https://mern-stack-project-xa1v.vercel.app/api/products");
         if (Array.isArray(response.data.products)) {
           setProducts(response.data.products);
         } else {
@@ -42,7 +42,7 @@ const FoodDisplay = () => {
               name={item.name}
               description={item.description}
               price={item.price}
-              image={`https://mern-stack-project-ten-mocha.vercel.app/uploads/${item.image}`}
+              image={`https://mern-stack-project-xa1v.vercel.app//uploads/${item.image}`}
             />
           </div>
         ))}

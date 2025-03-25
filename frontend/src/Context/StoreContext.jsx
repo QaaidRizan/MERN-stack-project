@@ -6,7 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
-  const [backendURL] = useState("https://mern-stack-project-ten-mocha.vercel.app/api/products");
+  const [backendURL] = useState("https://mern-stack-project-xa1v.vercel.app/api/products");
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
