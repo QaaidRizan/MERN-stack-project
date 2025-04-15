@@ -1,0 +1,12 @@
+export declare function getMountingTarget(target?: string): Element | null;
+export declare function getChatWindowWrapper(): Element | null;
+export declare function getChatWindowToggle(): Element | null;
+export declare function getChatWrapper(): Element | null;
+export declare function getChatMessages(): NodeListOf<Element>;
+export declare function getChatMessage(index: number): Element;
+export declare function getChatMessageByText(text: string): HTMLElement | null;
+export declare function getChatMessageTyping(): Element | null;
+export declare function getGetStartedButton(): Element | null;
+export declare function getChatInput(): Element | null;
+export declare function getChatInputTextarea(): Element | null;
+export declare function getChatInputSendButton(): Element | null;
