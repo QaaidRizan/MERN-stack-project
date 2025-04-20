@@ -42,7 +42,7 @@ const FoodDisplay = () => {
               name={item.name}
               description={item.description}
               price={item.price}
-              image={`https://server2-production-1aab.up.railway.app/uploads/${item.image}`}
+              image={`https://backendcar2.vercel.app/uploads/${item.image}`}
             />
           </div>
         ))}
