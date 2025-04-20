@@ -13,7 +13,7 @@ const FoodDisplay = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://backendcar2.vercel.app/api/products");
+        const response = await axios.get("https://server2-production-1aab.up.railway.app/api/products/");
         if (Array.isArray(response.data.products)) {
           setProducts(response.data.products);
         } else {
