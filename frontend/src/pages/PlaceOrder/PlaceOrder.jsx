@@ -12,7 +12,7 @@ const PlaceOrder = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/products/${id}`);
+        const response = await axios.get(`https://server2-production-1aab.up.railway.app/api/products/${id}`);
         if (response.data.success) {
           setProduct(response.data.product);
         } else {
@@ -45,7 +45,7 @@ const PlaceOrder = () => {
         <div className="product-details">
           <div className="product-image-container">
             <img
-              src={`http://localhost:3000/uploads/${product.image}`}
+              src={`https://server2-production-1aab.up.railway.app/uploads/${product.image}`}
               alt={product.name}
               className="product-image"
             />
