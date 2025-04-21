@@ -4,11 +4,27 @@ import "./FoodDisplay.css";
 import FoodItem from "../FoodItem/FoodItem";
 import axios from "axios";
 
-const FoodDisplay = () => {
+const CarDisplay = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const [theme, setTheme] = useState('default');
+
+  // Initialize theme from localStorage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+      // Check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemTheme = prefersDark ? 'dark' : 'light';
+      setTheme(systemTheme);
+      document.documentElement.setAttribute('data-theme', systemTheme);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,11 +48,24 @@ const FoodDisplay = () => {
   if (error) return <div className="error-message">{error}</div>;
 
   return (
-    <div className="food-display">
-      <h2>Top Car Near You</h2>
-      <div className="food-display-list">
+    <div className="car-display">
+      <div className="car-display-header">
+        <h2>Top Cars Near You</h2>
+        <div className="car-display-filters">
+          <button className="filter-button active">All</button>
+          <button className="filter-button">Luxury</button>
+          <button className="filter-button">SUV</button>
+          <button className="filter-button">Sedan</button>
+          <button className="filter-button">Sports</button>
+        </div>
+      </div>
+      <div className="car-display-list">
         {products.map((item) => (
-          <div key={item.id || item._id} onClick={() => navigate(`/place-order/${item.id || item._id}`)}>
+          <div 
+            key={item.id || item._id} 
+            className="car-item-container"
+            onClick={() => navigate(`/place-order/${item.id || item._id}`)}
+          >
             <FoodItem
               id={item.id || item._id}
               name={item.name}
@@ -51,4 +80,4 @@ const FoodDisplay = () => {
   );
 };
 
-export default FoodDisplay;
+export default CarDisplay;

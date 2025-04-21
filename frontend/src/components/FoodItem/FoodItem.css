@@ -1,88 +1,260 @@
+/* Theme variables */
+:root {
+  /* Light theme variables */
+  --food-item-bg: #ffffff;
+  --food-item-text: #333333;
+  --food-item-shadow: rgba(0, 0, 0, 0.1);
+  --food-item-hover-shadow: rgba(0, 0, 0, 0.2);
+  --food-item-price: tomato;
+  --food-item-feature-text: #666666;
+  --food-item-feature-icon: tomato;
+  --food-item-button-bg: tomato;
+  --food-item-button-text: white;
+  --food-item-button-hover: #ff6347;
+  --car-specs-bg: #f8f8f8;
+  --car-specs-text: #666666;
+  --car-year-badge: #4a90e2;
+}
+
+[data-theme="dark"] {
+  --food-item-bg: #1e1e1e;
+  --food-item-text: #f0f0f0;
+  --food-item-shadow: rgba(0, 0, 0, 0.3);
+  --food-item-hover-shadow: rgba(0, 0, 0, 0.5);
+  --food-item-price: #ff6347;
+  --food-item-feature-text: #cccccc;
+  --food-item-feature-icon: #ff6347;
+  --food-item-button-bg: #ff6347;
+  --food-item-button-text: white;
+  --food-item-button-hover: #ff8c75;
+  --car-specs-bg: #2a2a2a;
+  --car-specs-text: #cccccc;
+  --car-year-badge: #5a9ee2;
+}
+
 .food-item {
-  background-color: #ffffff;
+  background-color: var(--food-item-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
   overflow: hidden;
-  cursor: pointer;
+  box-shadow: 0 4px 8px var(--food-item-shadow);
+  transition: all 0.3s ease, 
+              background-color 0.5s ease, 
+              box-shadow 0.5s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .food-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px var(--food-item-hover-shadow);
+}
+
+.car-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
 }
 
 .food-item-image {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .food-item:hover .food-item-image {
   transform: scale(1.05);
 }
 
+.car-price-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--food-item-price);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.car-year-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: var(--car-year-badge);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
 .food-item-info {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-.food-item h3 {
-  font-size: 20px;
+.food-item-name {
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #333;
+  color: var(--food-item-text);
+  transition: color 0.5s ease;
 }
 
-.food-item-desc {
-  color: #666;
-  font-size: 14px;
+.food-item-description {
+  color: var(--food-item-text);
+  opacity: 0.8;
+  font-size: 0.9rem;
   margin-bottom: 15px;
-  line-height: 1.4;
+  line-height: 1.5;
+  transition: color 0.5s ease;
+  flex-grow: 1;
 }
 
-.food-item-price {
-  color: #2c3e50;
-  font-size: 24px;
-  font-weight: 700;
+.car-specs {
+  display: flex;
+  gap: 15px;
   margin-bottom: 15px;
+  padding: 12px;
+  background-color: var(--car-specs-bg);
+  border-radius: 8px;
+  transition: background-color 0.5s ease;
+}
+
+.car-spec-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: var(--car-specs-text);
+  transition: color 0.5s ease;
+}
+
+.car-spec-item svg {
+  color: var(--food-item-feature-icon);
+  transition: color 0.5s ease;
+}
+
+.car-features {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.car-feature {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: var(--food-item-feature-text);
+  transition: color 0.5s ease;
+}
+
+.car-feature svg {
+  color: var(--food-item-feature-icon);
+  transition: color 0.5s ease;
 }
 
 .view-details-button {
   display: block;
   width: 100%;
   padding: 12px;
-  background-color: #3498db;
-  color: white;
+  background-color: var(--food-item-button-bg);
+  color: var(--food-item-button-text);
   text-align: center;
   text-decoration: none;
   border: none;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease, 
+              background-color 0.5s ease;
   cursor: pointer;
+  margin-top: auto;
 }
 
 .view-details-button:hover {
-  background-color: #2980b9;
+  background-color: var(--food-item-button-hover);
+  transform: translateY(-2px);
+}
+
+/* Add these theme-specific styles */
+
+.food-item.theme-light {
+  background-color: #ffffff;
+  color: #333333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.food-item.theme-dark {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .food-item-name,
+.food-item.theme-dark .food-item-name {
+  color: #ffffff;
+}
+
+.theme-dark .food-item-description,
+.food-item.theme-dark .food-item-description {
+  color: #cccccc;
+}
+
+.theme-dark .car-price-tag,
+.food-item.theme-dark .car-price-tag {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+.theme-dark .car-feature,
+.food-item.theme-dark .car-feature {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+}
+
+.theme-dark .view-details-button,
+.food-item.theme-dark .view-details-button {
+  background-color: #4a6fa5;
+  color: #ffffff;
+}
+
+.theme-dark .view-details-button:hover,
+.food-item.theme-dark .view-details-button:hover {
+  background-color: #5a80b6;
 }
 
 @media (max-width: 768px) {
-  .food-item-image {
+  .car-image-container {
     height: 180px;
   }
 
-  .food-item h3 {
-    font-size: 18px;
+  .food-item-name {
+    font-size: 1.1rem;
   }
 
-  .food-item-price {
-    font-size: 20px;
+  .car-specs {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .car-features {
+    gap: 10px;
   }
 
   .view-details-button {
     padding: 10px;
-    font-size: 14px;
+    font-size: 0.9rem;
   }
 }

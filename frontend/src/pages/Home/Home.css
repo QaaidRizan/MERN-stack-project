@@ -1,0 +1,149 @@
+.home {
+  min-height: 100vh;
+}
+
+.hero-section {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--secondary-color);
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.featured-cars {
+  padding: 6rem 0;
+  background: var(--background-light);
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.car-card {
+  background: var(--secondary-color);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.car-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.car-info {
+  padding: 1.5rem;
+}
+
+.car-name {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+
+.car-price {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.car-specs {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.car-specs li {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.experience-section {
+  padding: 6rem 0;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.experience-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.experience-content h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.experience-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .car-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .experience-content h2 {
+    font-size: 2rem;
+  }
+  
+  .experience-content p {
+    font-size: 1rem;
+  }
+}

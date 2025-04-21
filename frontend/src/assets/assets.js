@@ -2,6 +2,7 @@ import basket_icon from './basket_icon.png'
 import logo from './logo.png'
 import header_img from './header_img.png'
 import search_icon from './search_icon.png'
+import iandi_logo from './iandi.jpg'
 import menu_1 from './menu_1.png'
 import menu_2 from './menu_2.png'
 import menu_3 from './menu_3.png'
@@ -64,6 +65,7 @@ import parcel_icon from './parcel_icon.png'
   
 export const assets = {
     logo,
+    iandi_logo,
     basket_icon,
     header_img,
     search_icon,

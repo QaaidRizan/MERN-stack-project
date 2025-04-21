@@ -1,39 +1,21 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { StoreContext } from "../../Context/StoreContext";
+import { ThemeContext } from "../../Context/ThemeContext";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 
-const Navbar = ({ setShowLogin }) => {
+const Navbar = () => {
   const [menu, setMenu] = useState("menu");
-  const [user, setUser] = useState("");
-  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown visibility
   const { getTotalCartAmount } = useContext(StoreContext);
-
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    setUser("");
-    Cookies.remove("userId");
-    Cookies.remove("email");
-    navigate("/");
-  };
-
-  useEffect(() => {
-    const token = Cookies.get("email");
-    setUser(token || ""); // Ensure user is set correctly
-  }, []); // Run only once on component mount
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className="navbar">
-      <Link to="/">
-  
+      <Link to="/" className="navbar-logo">
+        <img src={assets.iandi_logo} alt="I & I Autos Logo" className="logo-img" />
+        <span className="logo-text">I & I Autos</span>
       </Link>
       <ul className="navbar-menu">
         <Link
@@ -59,34 +41,22 @@ const Navbar = ({ setShowLogin }) => {
         </a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="Search" />
+        <img src={assets.search_icon} alt="Search" className="search-icon" />
         <div className="navbar-search-icon">
           <Link to="/cart">
             <img src={assets.basket_icon} alt="Basket" />
           </Link>
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
-        {!user ? (
-          <button onClick={() => setShowLogin(true)}>Sign In</button>
-        ) : (
-          <div className="navbar-profile">
-            <img
-              src={assets.profile_icon}
-              alt="Profile"
-              onClick={toggleDropdown}
-            />
-            {dropdownOpen && (
-              <ul className="nav-profile-dropdown">
-                <hr />
-                <li onClick={logout}>
-                  <img src={assets.logout_icon} alt="Logout" />
-                  <p>Logout</p>
-                </li>
-              </ul>
-            )}
-          </div>
-        )}
-        <button onClick={() => window.createChat.toggle()}>Chat</button>
+      
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button className="sign-in-button">Sign In</button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
       </div>
     </div>
   );
