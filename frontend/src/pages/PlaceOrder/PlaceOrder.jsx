@@ -45,7 +45,7 @@ const PlaceOrder = () => {
         <div className="product-details">
           <div className="product-image-container">
             <img
-              src={`https://server2-production-1aab.up.railway.app/uploads/${product.image}`}
+              src={product.image}
               alt={product.name}
               className="product-image"
             />
