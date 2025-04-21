@@ -42,7 +42,7 @@ const FoodDisplay = () => {
               name={item.name}
               description={item.description}
               price={item.price}
-              image={`https://res.cloudinary.com/dmlx9fibl/image/upload/v1745225171/products/${item.image}`}
+              image={item.image}
             />
           </div>
         ))}
