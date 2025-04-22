@@ -14,6 +14,17 @@
   --car-specs-bg: #f8f8f8;
   --car-specs-text: #666666;
   --car-year-badge: #4a90e2;
+
+  --car-item-bg: #ffffff;
+  --car-item-text: #333333;
+  --car-item-shadow: rgba(0, 0, 0, 0.1);
+  --car-item-hover-shadow: rgba(0, 0, 0, 0.2);
+  --car-item-price: tomato;
+  --car-item-feature-text: #666666;
+  --car-item-feature-icon: tomato;
+  --car-item-button-bg: tomato;
+  --car-item-button-text: white;
+  --car-item-button-hover: #ff6347;
 }
 
 [data-theme="dark"] {
@@ -30,6 +41,17 @@
   --car-specs-bg: #2a2a2a;
   --car-specs-text: #cccccc;
   --car-year-badge: #5a9ee2;
+
+  --car-item-bg: #1e1e1e;
+  --car-item-text: #f0f0f0;
+  --car-item-shadow: rgba(0, 0, 0, 0.3);
+  --car-item-hover-shadow: rgba(0, 0, 0, 0.5);
+  --car-item-price: #ff6347;
+  --car-item-feature-text: #cccccc;
+  --car-item-feature-icon: #ff6347;
+  --car-item-button-bg: #ff6347;
+  --car-item-button-text: white;
+  --car-item-button-hover: #ff8c75;
 }
 
 .food-item {
@@ -235,12 +257,115 @@
   background-color: #5a80b6;
 }
 
+.car-item {
+  background-color: var(--car-item-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px var(--car-item-shadow);
+  transition: all 0.3s ease, 
+              background-color 0.5s ease, 
+              box-shadow 0.5s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px var(--car-item-hover-shadow);
+}
+
+.car-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.car-item:hover .car-item-image {
+  transform: scale(1.05);
+}
+
+.car-item-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.car-item-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--car-item-text);
+  transition: color 0.5s ease;
+}
+
+.car-item-description {
+  color: var(--car-item-text);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  transition: color 0.5s ease;
+  flex-grow: 1;
+}
+
+.car-item.theme-light {
+  background-color: #ffffff;
+  color: #333333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.car-item.theme-dark {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .car-item-name,
+.car-item.theme-dark .car-item-name {
+  color: #ffffff;
+}
+
+.theme-dark .car-item-description,
+.car-item.theme-dark .car-item-description {
+  color: #cccccc;
+}
+
+.theme-dark .car-price-tag,
+.car-item.theme-dark .car-price-tag {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+.theme-dark .car-feature,
+.car-item.theme-dark .car-feature {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+}
+
+.theme-dark .view-details-button,
+.car-item.theme-dark .view-details-button {
+  background-color: #4a6fa5;
+  color: #ffffff;
+}
+
+.theme-dark .view-details-button:hover,
+.car-item.theme-dark .view-details-button:hover {
+  background-color: #5a80b6;
+}
+
 @media (max-width: 768px) {
   .car-image-container {
     height: 180px;
   }
 
   .food-item-name {
+    font-size: 1.1rem;
+  }
+
+  .car-item-name {
     font-size: 1.1rem;
   }
 

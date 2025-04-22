@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";  // ✅ Remove extra BrowserRo
 import axios from "axios";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
-import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
-import FoodDisplay from "./components/FoodDisplay/FoodDisplay";
+import PlaceOrder from "./pages/View/View";
+import FoodDisplay from "./components/Display/Display";
 import { ThemeProvider } from "./Context/ThemeContext";
 
 const App = () => {

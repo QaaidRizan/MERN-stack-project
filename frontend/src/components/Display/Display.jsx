@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./FoodDisplay.css";
-import FoodItem from "../FoodItem/FoodItem";
+import "./Display.css";
+import Item from "../Item/Item";
 import axios from "axios";
 
 const CarDisplay = () => {
@@ -66,7 +66,7 @@ const CarDisplay = () => {
             className="car-item-container"
             onClick={() => navigate(`/place-order/${item.id || item._id}`)}
           >
-            <FoodItem
+            <Item
               id={item.id || item._id}
               name={item.name}
               description={item.description}

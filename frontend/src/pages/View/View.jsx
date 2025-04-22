@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import "./PlaceOrder.css";
+import "./View.css";
 import axios from "axios";
 import { ThemeContext } from "../../Context/ThemeContext";
 

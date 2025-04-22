@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import "./FoodItem.css";
+import "./Item.css";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Context/ThemeContext";
 
-const FoodItem = ({ id, name, description, price, image, year, mileage, transmission, fuelType }) => {
+const CarItem = ({ id, name, description, price, image, year, mileage, transmission, fuelType }) => {
   const { theme } = useContext(ThemeContext);
   const maxDescriptionLength = 80; // Increased for car descriptions
   const truncatedDescription = description.length > maxDescriptionLength 
@@ -13,7 +13,7 @@ const FoodItem = ({ id, name, description, price, image, year, mileage, transmis
   // Format price with commas for thousands
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'LKR',
     maximumFractionDigits: 0
   }).format(price);
 
@@ -21,15 +21,15 @@ const FoodItem = ({ id, name, description, price, image, year, mileage, transmis
   const formattedMileage = mileage ? new Intl.NumberFormat('en-US').format(mileage) : 'N/A';
 
   return (
-    <div className={`food-item ${theme}`}>
+    <div className={`car-item theme-${theme}`}>
       <div className="car-image-container">
-        <img src={image} alt={name} className="food-item-image" />
+        <img src={image} alt={name} className="car-item-image" />
         <div className="car-price-tag">{formattedPrice}</div>
         {year && <div className="car-year-badge">{year}</div>}
       </div>
-      <div className="food-item-info">
-        <h3 className="food-item-name">{name}</h3>
-        <p className="food-item-description">{truncatedDescription}</p>
+      <div className="car-item-info">
+        <h3 className="car-item-name">{name}</h3>
+        <p className="car-item-description">{truncatedDescription}</p>
         
         <div className="car-specs">
           {mileage && (
@@ -92,4 +92,4 @@ const FoodItem = ({ id, name, description, price, image, year, mileage, transmis
   );
 };
 
-export default FoodItem;
+export default CarItem;
