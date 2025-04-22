@@ -6,7 +6,7 @@ import StoreContextProvider from "./Context/StoreContext";
 import App from "./App";
 import "./index.css";
 
-const clerkPubKey = import.meta.env.PUBLISHABLE_KEY;
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || import.meta.env.CLERK_PUBLISHABLE_KEY;
 
 if (!clerkPubKey) {
   throw new Error("Missing Clerk Publishable Key");
