@@ -10,7 +10,7 @@ export default function Add() {
         name: "",
         description: "",
         price: "",
-        category: "Buses", // Default category
+        category: "Car", // Default category
     });
     const [loading, setLoading] = useState(false);
 
@@ -22,10 +22,7 @@ export default function Add() {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file && file.type.startsWith("image/")) {
-            const reader = new FileReader();
-            reader.onloadend = () => setImage(reader.result);
-            reader.onerror = () => toast.error("Error reading the image file.");
-            reader.readAsDataURL(file);
+            setImage(file); // Store the file directly for upload
         } else {
             toast.error("Please upload a valid image file.");
             setImage(null);
@@ -44,20 +41,20 @@ export default function Add() {
 
         const formData = new FormData();
         formData.append("name", data.name);
-        formData.append("price", data.price);
-        formData.append("image", event.target.image.files[0]);
         formData.append("description", data.description);
         formData.append("category", data.category);
+        formData.append("price", data.price);
+        formData.append("image", image); // Use the file directly
 
         try {
-            const response = await fetch("http://localhost:3000/api/products", {
+            const response = await fetch("https://server2-production-1aab.up.railway.app/api/products", {
                 method: "POST",
                 body: formData,
             });
 
             if (response.ok) {
                 toast.success("Product added successfully!");
-                setData({ name: "", description: "", category: "Buses", price: "" });
+                setData({ name: "", description: "", category: "Car", price: "" });
                 setImage(null);
             } else {
                 const errorData = await response.json();
@@ -80,7 +77,7 @@ export default function Add() {
                         <div className="upload-area">
                             <label htmlFor="image">
                                 <img
-                                    src={image || assets.upload_area}
+                                    src={image ? URL.createObjectURL(image) : assets.upload_area}
                                     alt="Upload Area"
                                     className="upload-img"
                                 />
