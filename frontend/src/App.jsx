@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import PlaceOrder from "./pages/View/View";
 import FoodDisplay from "./components/Display/Display";
 import { ThemeProvider } from "./Context/ThemeContext";
+import Explore from './components/Explore/explore';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -30,6 +31,7 @@ const App = () => {
         <Routes>  {/* ✅ This is fine inside App.jsx */}
           <Route path="/" element={<Home />} />
           <Route path="/place-order/:id" element={<PlaceOrder products={products} />} />
+          <Route path="/explore" element={<Explore />} />
         </Routes>
       </div>
     </ThemeProvider>

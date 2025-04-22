@@ -27,6 +27,17 @@ const Header = () => {
     setTheme(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+
+    window.location.reload(); // Reload the page to apply the new theme
+  };
+
+  // Scroll to footer section
+  const scrollToFooter = (e) => {
+    e.preventDefault();
+    const footerElement = document.getElementById('footer');
+    if (footerElement) {
+      footerElement.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -50,7 +61,7 @@ const Header = () => {
         </p>
         <div className="header-buttons">
           <Link to="/explore" className="primary-button">Explore Cars</Link>
-          <Link to="/contact" className="secondary-button">Contact Us</Link>
+          <a href="#footer" onClick={scrollToFooter} className="secondary-button">Contact Us</a>
         </div>
       </div>
       <div className="scroll-indicator"></div>

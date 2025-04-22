@@ -48,7 +48,7 @@ const CarDisplay = () => {
   if (error) return <div className="error-message">{error}</div>;
 
   return (
-    <div className="car-display">
+    <div className="car-display" id="top-cars">
       <div className="car-display-header">
         <h2>Top Cars Near You</h2>
         <div className="car-display-filters">

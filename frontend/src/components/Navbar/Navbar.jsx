@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { StoreContext } from "../../Context/StoreContext";
 import { ThemeContext } from "../../Context/ThemeContext";
@@ -7,13 +7,27 @@ import "./Navbar.css";
 import { assets } from "../../assets/assets";
 
 const Navbar = () => {
-  const [menu, setMenu] = useState("menu");
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const [menu, setMenu] = useState("home"); // Default to home instead of menu
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const location = useLocation();
+
+  // Set active menu item based on current route
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setMenu("home");
+    }
+  }, [location]);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="navbar">
-      <Link to="/" className="navbar-logo">
+      <Link to="/" className="navbar-logo" onClick={() => setMenu("home")}>
         <img src={assets.iandi_logo} alt="I & I Autos Logo" className="logo-img" />
         <span className="logo-text">I & I Autos</span>
       </Link>
@@ -26,15 +40,23 @@ const Navbar = () => {
           Home
         </Link>
         <a
-          href="#explore-menu"
-          onClick={() => setMenu("menu")}
+          href="#top-cars"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('top-cars');
+            setMenu("menu");
+          }}
           className={menu === "menu" ? "active" : ""}
         >
           Top Cars
         </a>
         <a
           href="#footer"
-          onClick={() => setMenu("contact-us")}
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('footer');
+            setMenu("contact-us");
+          }}
           className={menu === "contact-us" ? "active" : ""}
         >
           Contact Us
@@ -44,9 +66,7 @@ const Navbar = () => {
         <img src={assets.search_icon} alt="Search" className="search-icon" />
         <div className="navbar-search-icon">
           <Link to="/cart">
-            <img src={assets.basket_icon} alt="Basket" />
           </Link>
-          <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
       
         <SignedOut>
