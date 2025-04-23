@@ -3,7 +3,7 @@ import "./Item.css";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Context/ThemeContext";
 
-const CarItem = ({ id, name, description, price, image, year, mileage, transmission, fuelType }) => {
+const CarItem = ({ id, name, description, price, images, year, mileage, transmission, fuelType }) => {
   const { theme } = useContext(ThemeContext);
   const maxDescriptionLength = 80; // Increased for car descriptions
   const truncatedDescription = description.length > maxDescriptionLength 
@@ -20,10 +20,13 @@ const CarItem = ({ id, name, description, price, image, year, mileage, transmiss
   // Format mileage with commas
   const formattedMileage = mileage ? new Intl.NumberFormat('en-US').format(mileage) : 'N/A';
 
+  // Get the first image from the images array or use a placeholder
+  const primaryImage = images && images.length > 0 ? images[0] : "https://via.placeholder.com/300x200?text=No+Image";
+
   return (
     <div className={`car-item theme-${theme}`}>
       <div className="car-image-container">
-        <img src={image} alt={name} className="car-item-image" />
+        <img src={primaryImage} alt={name} className="car-item-image" />
         <div className="car-price-tag">{formattedPrice}</div>
         {year && <div className="car-year-badge">{year}</div>}
       </div>
@@ -61,29 +64,6 @@ const CarItem = ({ id, name, description, price, image, year, mileage, transmiss
           )}
         </div>
         
-        <div className="car-features">
-          <span className="car-feature">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C1.5 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2"></path>
-              <circle cx="7" cy="17" r="2"></circle>
-              <circle cx="17" cy="17" r="2"></circle>
-            </svg>
-            Auto
-          </span>
-          <span className="car-feature">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            Secure
-          </span>
-          <span className="car-feature">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
-            Verified
-          </span>
-        </div>
         <Link to={`/place-order/${id}`} className="view-details-button">
           View Details
         </Link>

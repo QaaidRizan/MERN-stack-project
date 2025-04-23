@@ -10,6 +10,7 @@ const PlaceOrder = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0); // Track the current image index
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -43,6 +44,22 @@ const PlaceOrder = () => {
     return mileage ? new Intl.NumberFormat('en-US').format(mileage) : 'N/A';
   };
 
+  // Handle next image
+  const handleNextImage = () => {
+    if (product && product.images) {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.images.length);
+    }
+  };
+
+  // Handle previous image
+  const handlePrevImage = () => {
+    if (product && product.images) {
+      setCurrentImageIndex((prevIndex) =>
+        (prevIndex - 1 + product.images.length) % product.images.length
+      );
+    }
+  };
+
   if (loading)
     return (
       <div className="loading-container">
@@ -60,11 +77,20 @@ const PlaceOrder = () => {
       {product ? (
         <div className="product-details">
           <div className="product-image-container">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="product-image"
-            />
+            {/* Image Carousel */}
+            <div className="image-carousel">
+              <button className="carousel-arrow left-arrow" onClick={handlePrevImage}>
+                &#8249;
+              </button>
+              <img
+                src={product.images[currentImageIndex]}
+                alt={product.name}
+                className="product-image"
+              />
+              <button className="carousel-arrow right-arrow" onClick={handleNextImage}>
+                &#8250;
+              </button>
+            </div>
             {product.year && <div className="car-year-badge">{product.year}</div>}
             <div className="car-price-tag">{formatPrice(product.price)}</div>
           </div>
@@ -100,63 +126,6 @@ const PlaceOrder = () => {
                   <span>{product.fuelType}</span>
                 </div>
               )}
-            </div>
-            
-            <div className="car-features-section">
-              <h4>Key Features</h4>
-              <div className="car-features">
-                {product.features && product.features.map((feature, index) => (
-                  <span key={index} className="car-feature">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                    {feature}
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            <div className="car-details-section">
-              <h4>Additional Details</h4>
-              <div className="car-details-grid">
-                {product.engine && (
-                  <div className="car-detail-item">
-                    <span className="detail-label">Engine:</span>
-                    <span className="detail-value">{product.engine}</span>
-                  </div>
-                )}
-                {product.exteriorColor && (
-                  <div className="car-detail-item">
-                    <span className="detail-label">Exterior Color:</span>
-                    <span className="detail-value">{product.exteriorColor}</span>
-                  </div>
-                )}
-                {product.interiorColor && (
-                  <div className="car-detail-item">
-                    <span className="detail-label">Interior Color:</span>
-                    <span className="detail-value">{product.interiorColor}</span>
-                  </div>
-                )}
-                {product.bodyStyle && (
-                  <div className="car-detail-item">
-                    <span className="detail-label">Body Style:</span>
-                    <span className="detail-value">{product.bodyStyle}</span>
-                  </div>
-                )}
-                {product.doors && (
-                  <div className="car-detail-item">
-                    <span className="detail-label">Doors:</span>
-                    <span className="detail-value">{product.doors}</span>
-                  </div>
-                )}
-                {product.seats && (
-                  <div className="car-detail-item">
-                    <span className="detail-label">Seats:</span>
-                    <span className="detail-value">{product.seats}</span>
-                  </div>
-                )}
-              </div>
             </div>
             
             <button className="order-btn">Schedule Test Drive</button>

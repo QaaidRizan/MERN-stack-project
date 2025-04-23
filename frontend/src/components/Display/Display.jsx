@@ -9,28 +9,28 @@ const CarDisplay = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [theme, setTheme] = useState('default');
+  const [theme, setTheme] = useState("default");
 
   // Initialize theme from localStorage or system preference
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setTheme(savedTheme);
-      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
     } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const systemTheme = prefersDark ? 'dark' : 'light';
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const systemTheme = prefersDark ? "dark" : "light";
       setTheme(systemTheme);
-      document.documentElement.setAttribute('data-theme', systemTheme);
+      document.documentElement.setAttribute("data-theme", systemTheme);
     }
   }, []);
 
+  // Fetch products from the backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://server2-production-1aab.up.railway.app/api/products/");
-        if (Array.isArray(response.data.products)) {
+        if (response.data.success && Array.isArray(response.data.products)) {
           setProducts(response.data.products);
         } else {
           setProducts([]);
@@ -61,8 +61,8 @@ const CarDisplay = () => {
       </div>
       <div className="car-display-list">
         {products.map((item) => (
-          <div 
-            key={item.id || item._id} 
+          <div
+            key={item.id || item._id}
             className="car-item-container"
             onClick={() => navigate(`/place-order/${item.id || item._id}`)}
           >
@@ -71,7 +71,11 @@ const CarDisplay = () => {
               name={item.name}
               description={item.description}
               price={item.price}
-              image={item.image}
+              images={item.images} // Pass the images array
+              year={item.year}
+              mileage={item.mileage}
+              transmission={item.transmission}
+              fuelType={item.fuelType}
             />
           </div>
         ))}
