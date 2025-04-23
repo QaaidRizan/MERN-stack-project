@@ -34,7 +34,7 @@ const Explore = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://server2-production-1aab.up.railway.app/api/products/");
-        if (Array.isArray(response.data.products)) {
+        if (response.data.success && Array.isArray(response.data.products)) {
           setProducts(response.data.products);
         } else {
           setProducts([]);
@@ -110,7 +110,7 @@ const Explore = () => {
                 name={item.name}
                 description={item.description}
                 price={item.price}
-                image={item.image}
+                images={item.images}
                 year={item.year}
                 mileage={item.mileage}
                 transmission={item.transmission}
