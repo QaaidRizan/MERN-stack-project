@@ -74,35 +74,45 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px; /* Increased gap between elements */
-  padding: 40px; /* Increased from 30px to 40px */
+  width: 100%;
+  gap: 30px;
+  padding: 0; /* Removed padding from here */
 }
 
-/* Product Image Container - Keep padding here */
+/* Product Image Container - Wider container */
 .product-image-container {
   width: 100%;
-  max-width: 850px; /* Increased from 700px for larger image display */
+  max-width: 1200px; /* Increased from 1100px for wider display */
   position: relative;
-  margin-bottom: 20px;
-  padding: 20px; /* Kept padding here */
+  margin-bottom: 30px;
+  padding: 0;
   background-color: var(--place-order-bg);
   border-radius: 10px;
   box-shadow: 0px 4px 8px var(--place-order-shadow);
 }
 
-/* Product Image - Increased size */
+.product-image-container.no-padding {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+/* Product Image - Truly responsive images */
 .product-image {
   width: 100%;
-  height: auto;
-  min-height: 700px; /* Increased from 600px for better visibility */
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px var(--place-order-shadow);
-  transition: transform 0.3s ease-in-out, box-shadow 0.5s ease;
+  height: 80vh; /* Increased from 70vh to 80vh for larger display */
+  min-height: 500px; /* Increased from 350px for better visibility */
   object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
 .product-image:hover {
-  transform: scale(1.03); /* Slight zoom effect on hover */
+  transform: scale(1.02); /* Slight zoom effect on hover */
 }
 
 .car-year-badge {
@@ -119,40 +129,96 @@ body {
   z-index: 1;
 }
 
-.car-price-tag {
+.car-year-badge {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: var(--place-order-price);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 20px;
+  top: 10px;
+  left: 10px;
+}
+
+/* Remove the original price tag */
+.car-price-tag {
+  display: none;
+}
+
+/* Prominent car price display */
+.car-price-prominent {
+  font-size: 2.4rem;
   font-weight: 700;
-  font-size: 1.2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  color: var(--place-order-price, #ff6347);
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--place-order-price);
+  text-align: left;
+  width: 100%;
+  letter-spacing: 0.5px;
 }
 
 .product-info {
   width: 100%;
   max-width: 1000px;
   text-align: left;
+  padding: 0 20px;
 }
 
 .product-info h3 {
-  font-size: 24px;
+  font-size: 28px;
   color: var(--place-order-text);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   transition: color 0.5s ease;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .product-info .description {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--place-order-text);
-  opacity: 0.8;
-  margin-bottom: 20px;
-  line-height: 1.5;
+  opacity: 0.9;
+  margin-bottom: 25px;
+  line-height: 1.6;
   transition: color 0.5s ease;
+  text-align: left;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Styling for description sections */
+.description h4, 
+.description strong {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--place-order-text);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.description h4:first-child, 
+.description strong:first-child {
+  margin-top: 0;
+}
+
+/* Styling for bullet points and lists */
+.description ul, 
+.description ol {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.description li {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+/* Styling for emojis in description */
+.description span[role="img"] {
+  margin-right: 5px;
+}
+
+/* Styling for paragraphs in description */
+.description p {
+  margin-bottom: 15px;
 }
 
 /* Car Specs */
@@ -297,121 +363,212 @@ body {
   margin-top: 20px;
 }
 
-/* Image Carousel - Removed redundant padding */
+/* Image Carousel - Wider carousel */
 .image-carousel {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 850px; /* Increased to match container */
-  margin: 0 auto;
-  padding: 0; /* Removed redundant padding */
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
+.image-carousel.no-padding {
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Image carousel arrows */
 .carousel-arrow {
   position: absolute;
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust for centering */
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 50px; /* Increased size for better visibility */
-  height: 50px; /* Increased size for better visibility */
-  font-size: 1.8rem; /* Increased font size */
+  width: 60px; /* Increased from 50px for better visibility */
+  height: 60px; /* Increased from 50px for better visibility */
+  font-size: 2rem; /* Increased from 1.8rem */
   cursor: pointer;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .left-arrow {
-  left: 15px; /* Adjusted position for better spacing */
+  left: 20px; /* Increased from 10px for better spacing */
 }
 
 .right-arrow {
-  right: 15px; /* Adjusted position for better spacing */
+  right: 20px; /* Increased from 10px for better spacing */
 }
 
 .carousel-arrow:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .product-image-container, .image-carousel {
-    max-width: 800px;
+    max-width: 1100px;
   }
   
   .product-image {
-    min-height: 600px;
+    height: 75vh;
+  }
+}
+
+@media (max-width: 1200px) {
+  .product-image-container, .image-carousel {
+    max-width: 1000px;
+  }
+  
+  .product-image {
+    height: 70vh;
+    min-height: 450px;
   }
 }
 
 @media (max-width: 992px) {
   .place-order {
     margin: 40px auto;
-    padding: 50px; /* Increased from 40px to 50px */
+    padding: 50px;
   }
   
   .product-details {
-    gap: 40px; /* Increased gap */
-    padding: 30px; /* Increased from 20px to 30px */
+    gap: 40px;
+    padding: 0; /* Removed padding */
   }
   
-  .car-specs {
-    padding: 30px; /* Increased from 20px to 30px */
-  }
-  
-  .car-features-section, .car-details-section {
-    padding: 30px; /* Increased from 20px to 30px */
-  }
-
   .product-image-container, .image-carousel {
-    max-width: 700px;
+    max-width: 900px;
   }
   
   .product-image {
-    min-height: 500px;
+    height: 65vh;
+    min-height: 400px;
+  }
+  
+  .carousel-arrow {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 768px) {
   .place-order {
-    padding: 40px; /* Increased from 30px to 40px */
+    padding: 20px;
     margin: 30px 20px;
   }
 
   .product-details {
-    padding: 25px; /* Increased from 15px to 25px */
+    padding: 0; /* Removed padding */
   }
   
-  .car-specs {
-    padding: 25px; /* Increased from 20px to 25px */
-  }
-  
-  .car-features-section, .car-details-section {
-    padding: 25px; /* Increased from 20px to 25px */
-  }
-
-  .image-carousel {
+  .product-image-container, .image-carousel {
     max-width: 100%;
-    padding: 10px; /* Adjusted padding for smaller screens */
-  }
-
-  .product-image-container {
-    padding: 10px;
   }
 
   .product-image {
-    min-height: 400px;
+    height: 60vh;
+    min-height: 350px;
   }
 
   .carousel-arrow {
-    width: 40px; /* Reduced size for smaller screens */
-    height: 40px; /* Reduced size for smaller screens */
-    font-size: 1.5rem; /* Reduced font size */
+    width: 45px;
+    height: 45px;
+    font-size: 1.6rem;
   }
+  
+  .left-arrow {
+    left: 10px;
+  }
+  
+  .right-arrow {
+    right: 10px;
+  }
+
+  .product-info {
+    padding: 0 15px;
+  }
+  
+  .product-info h3 {
+    font-size: 24px;
+  }
+  
+  .product-info .description {
+    font-size: 16px;
+    padding: 12px;
+  }
+  
+  .description h4, 
+  .description strong {
+    font-size: 17px;
+  }
+  
+  .car-price-prominent {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-image {
+    height: 50vh;
+    min-height: 300px;
+  }
+  
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+
+  .product-info {
+    padding: 0 10px;
+  }
+  
+  .product-info h3 {
+    font-size: 22px;
+  }
+  
+  .product-info .description {
+    font-size: 15px;
+    padding: 10px;
+  }
+  
+  .description h4, 
+  .description strong {
+    font-size: 16px;
+  }
+  
+  .car-price-prominent {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .product-image {
+    height: 45vh;
+    min-height: 250px;
+  }
+  
+  .carousel-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Dark theme support */
+.theme-dark .car-price-prominent {
+  color: #ff6347;
+  border-bottom-color: #333;
 }
