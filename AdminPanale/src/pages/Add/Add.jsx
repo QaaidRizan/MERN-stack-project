@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { assets } from "../../assets/assets";
 
 export default function Add() {
-    const [image, setImage] = useState(null);
+    const [images, setImages] = useState([null, null, null, null, null]); // Array for 5 images
     const [data, setData] = useState({
         name: "",
         description: "",
@@ -19,21 +19,25 @@ export default function Add() {
         setData((prevData) => ({ ...prevData, [name]: value }));
     }, []);
 
-    const handleImageChange = (event) => {
+    const handleImageChange = (index) => (event) => {
         const file = event.target.files[0];
-        if (file && file.type.startsWith("image/")) {
-            setImage(file); // Store the file directly for upload
-        } else {
-            toast.error("Please upload a valid image file.");
-            setImage(null);
-        }
+        setImages((prevImages) => {
+            const updatedImages = [...prevImages];
+            if (file && file.type.startsWith("image/")) {
+                updatedImages[index] = file; // Update the specific image
+            } else {
+                toast.error("Please upload a valid image file.");
+                updatedImages[index] = null;
+            }
+            return updatedImages;
+        });
     };
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
 
-        if (!data.name || !data.description || !data.price || !data.category || !image) {
-            toast.error("All fields (name, price, image, description, category) are required.");
+        if (!data.name || !data.description || !data.price || !data.category || !images.some((img) => img)) {
+            toast.error("All fields (name, price, description, category) are required, and at least one image must be uploaded.");
             return;
         }
 
@@ -44,7 +48,11 @@ export default function Add() {
         formData.append("description", data.description);
         formData.append("category", data.category);
         formData.append("price", data.price);
-        formData.append("image", image); // Use the file directly
+        images.forEach((image, index) => {
+            if (image) {
+                formData.append(`image${index + 1}`, image); // Append only non-null images
+            }
+        });
 
         try {
             const response = await fetch("https://server2-production-1aab.up.railway.app/api/products", {
@@ -55,7 +63,7 @@ export default function Add() {
             if (response.ok) {
                 toast.success("Product added successfully!");
                 setData({ name: "", description: "", category: "Car", price: "" });
-                setImage(null);
+                setImages([null, null, null, null, null]);
             } else {
                 const errorData = await response.json();
                 toast.error(`Failed to add product: ${errorData.message || "Unknown error"}`);
@@ -73,22 +81,26 @@ export default function Add() {
                 <h2><u><center>Add Product</center></u></h2>
                 <form onSubmit={onSubmitHandler} className="form">
                     <div className="form-group">
-                        <label>Upload Image</label>
+                        <label>Upload Images (At least one required)</label>
                         <div className="upload-area">
-                            <label htmlFor="image">
-                                <img
-                                    src={image ? URL.createObjectURL(image) : assets.upload_area}
-                                    alt="Upload Area"
-                                    className="upload-img"
-                                />
-                            </label>
-                            <input
-                                type="file"
-                                id="image"
-                                hidden
-                                accept="image/*"
-                                onChange={handleImageChange}
-                            />
+                            {images.map((image, index) => (
+                                <div key={index} className="image-upload-box">
+                                    <label htmlFor={`image${index}`}>
+                                        <img
+                                            src={image ? URL.createObjectURL(image) : assets.upload_area}
+                                            alt={`Upload Area ${index + 1}`}
+                                            className="upload-img"
+                                        />
+                                    </label>
+                                    <input
+                                        type="file"
+                                        id={`image${index}`}
+                                        hidden
+                                        accept="image/*"
+                                        onChange={handleImageChange(index)}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className="form-group">

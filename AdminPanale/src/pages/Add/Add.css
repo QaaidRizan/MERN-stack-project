@@ -70,4 +70,30 @@
   .head{
     align-items: center;
   }
-  
+
+  .upload-area {
+    display: flex; /* Align items horizontally */
+    gap: 15px; /* Add spacing between upload boxes */
+    justify-content: center; /* Center the upload boxes */
+    flex-wrap: wrap; /* Allow wrapping if the screen is too narrow */
+  }
+
+  .image-upload-box {
+    display: flex;
+    flex-direction: column; /* Stack the label and input vertically */
+    align-items: center; /* Center the content */
+    width: 120px; /* Set a fixed width for each box */
+    height: 120px; /* Set a fixed height for each box */
+    border: 1px dashed #ccc; /* Dashed border for the box */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Add padding inside the box */
+    cursor: pointer;
+    position: relative;
+  }
+
+  .image-upload-box img {
+    width: 100%; /* Make the image fill the box */
+    height: 100%; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image fits nicely */
+    border-radius: 8px; /* Match the box's rounded corners */
+  }
