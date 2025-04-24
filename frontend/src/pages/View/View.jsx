@@ -30,13 +30,13 @@ const PlaceOrder = () => {
     fetchProduct();
   }, [id]);
 
-  // Format price with commas for thousands
+  // Format price and append "M"
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-US', {
+    return `${new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'LKR',
-      maximumFractionDigits: 0
-    }).format(price);
+      maximumFractionDigits: 0,
+    }).format(price)}M`; // Append "M" directly
   };
 
   // Format mileage with commas
