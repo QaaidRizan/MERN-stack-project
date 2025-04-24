@@ -139,7 +139,7 @@ export default function Add() {
                     <div className="form-group">
                         <label>Part Price</label>
                         <input
-                            type="text"
+                            type="number"
                             name="price"
                             value={data.price}
                             onChange={onChangeHandler}
