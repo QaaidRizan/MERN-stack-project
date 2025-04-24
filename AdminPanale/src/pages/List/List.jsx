@@ -10,29 +10,37 @@ export default function List() {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [editingItem, setEditingItem] = useState(null);
-    const [formData, setFormData] = useState({ name: '', category: '', price: '', image: '' });
+    const [formData, setFormData] = useState({ name: '', category: '', price: '', description: '' });
+    const [images, setImages] = useState([null, null, null, null, null]);
     const [imagePreview, setImagePreview] = useState(null);
+
+    const API_BASE_URL = 'https://server2-production-1aab.up.railway.app/api/products';
 
     const fetchProducts = async () => {
         try {
-            let url = 'http://localhost:3000/api/products';
+            let url = API_BASE_URL;
             if (searchTerm) {
                 url += `?name=${encodeURIComponent(searchTerm)}`;
             }
             const response = await axios.get(url);
 
-            if (response.data && response.data.products && Array.isArray(response.data.products)) {
+            // Check if the response has the success property and products array
+            if (response.data && response.data.success && Array.isArray(response.data.products)) {
                 setProducts(response.data.products.map(product => ({
-                    id: product._id || product.id,
+                    id: product.id, // Already formatted as id in your API
                     name: product.name,
                     price: product.price,
+                    description: product.description,
                     category: product.category,
-                    image: product.image, // Store just the filename
+                    // Get the first image from the images array
+                    image: product.images && product.images.length > 0 ? product.images[0] : null,
+                    // Store all images
+                    images: product.images || []
                 })));
             } else {
                 console.warn('API response is not in the expected format:', response.data);
                 setProducts([]);
-                toast.error(response.data?.message || 'Invalid response from API');
+                toast.error('Invalid response from API');
             }
         } catch (error) {
             toast.error(`Error fetching data: ${error.message}`);
@@ -44,7 +52,7 @@ export default function List() {
 
     const RemoveItem = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/api/products/${id}`);
+            await axios.delete(`${API_BASE_URL}/${id}`);
             toast.success('Item removed successfully!');
             fetchProducts();
         } catch (error) {
@@ -54,8 +62,17 @@ export default function List() {
 
     const UpdateItem = (item) => {
         setEditingItem(item.id);
-        setFormData({ name: item.name, category: item.category, price: item.price, image: item.image });
-        setImagePreview(`http://localhost:3000/uploads/${item.image}`);
+        setFormData({ 
+            name: item.name, 
+            category: item.category, 
+            price: item.price,
+            description: item.description
+        });
+        
+        // If the item has images, set the preview to the first one
+        if (item.images && item.images.length > 0) {
+            setImagePreview(item.images[0]);
+        }
     };
 
     const handleFormChange = (e) => {
@@ -75,11 +92,18 @@ export default function List() {
         try {
             const formDataToSend = new FormData();
             formDataToSend.append('name', formData.name);
+            formDataToSend.append('description', formData.description);
             formDataToSend.append('category', formData.category);
             formDataToSend.append('price', formData.price);
-            formDataToSend.append('image', formData.image);
+            
+            // Append only non-null images
+            images.forEach((image, index) => {
+                if (image instanceof File) {
+                    formDataToSend.append(`image${index + 1}`, image);
+                }
+            });
 
-            await axios.put(`http://localhost:3000/api/products/${editingItem}`, formDataToSend, {
+            await axios.put(`${API_BASE_URL}/${editingItem}`, formDataToSend, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             toast.success('Item updated successfully!');
@@ -105,7 +129,7 @@ export default function List() {
     return (
         <div className="list-add-flex-col">
             <ToastContainer />
-            <h1>All Vehicle List</h1>
+            <h1>All Vehicle Parts</h1>
             <div className="search-container">
                 <input
                     type="text"
@@ -123,13 +147,17 @@ export default function List() {
                     products.map((item) => (
                         <div key={item.id} className="list-table-format">
                             <img
-                                src={`http://localhost:3000/uploads/${item.image}`}
+                                src={item.image} // This will now be image1 from MongoDB
                                 alt={item.name}
                                 className="product-image"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = 'https://via.placeholder.com/150?text=No+Image';
+                                }}
                             />
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.name}</p> {/* Added non-breaking space */}
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.category}</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${item.price}</p>
+                            <p>{item.name}</p>
+                            <p>{item.category}</p>
+                            <p>${parseFloat(item.price).toFixed(2)}</p>
                             <div className="action-buttons">
                                 <button onClick={() => RemoveItem(item.id)}>Delete</button>
                                 <button onClick={() => UpdateItem(item)}>Update</button>
@@ -143,7 +171,7 @@ export default function List() {
 
             {editingItem && (
                 <div className="update-form">
-                    <h3>Update Food Item</h3>
+                    <h3>Update Product</h3>
                     <form onSubmit={handleUpdateSubmit} encType="multipart/form-data">
                         <div>
                             <label>Name:</label>
@@ -156,14 +184,26 @@ export default function List() {
                             />
                         </div>
                         <div>
+                            <label>Description:</label>
+                            <textarea
+                                name="description"
+                                value={formData.description}
+                                onChange={handleFormChange}
+                                required
+                            />
+                        </div>
+                        <div>
                             <label>Category:</label>
-                            <input
-                                type="text"
+                            <select
                                 name="category"
                                 value={formData.category}
                                 onChange={handleFormChange}
                                 required
-                            />
+                            >
+                                <option value="Car">Car</option>
+                                <option value="Bike">Bike</option>
+                                <option value="Boat">Boat</option>
+                            </select>
                         </div>
                         <div>
                             <label>Price:</label>
@@ -173,6 +213,7 @@ export default function List() {
                                 value={formData.price}
                                 onChange={handleFormChange}
                                 required
+                                min="0"
                             />
                         </div>
                         <div>

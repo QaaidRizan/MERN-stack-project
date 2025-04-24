@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from './component/navbar/navbar';  // Ensure correct path and capitalization
 import Sidebar from './component/sidebar/sidebar';  // Ensure correct path and capitalization
 import { Routes, Route } from 'react-router-dom';
-import Order from './pages/Order/Order';
 import List from './pages/List/List';
 import Add from './pages/Add/Add';
 import { ToastContainer } from 'react-toastify';
@@ -20,9 +19,7 @@ const App = () => {
         <Sidebar />
         <Routes>
           <Route path="/add" element={<Add/>} />
-          <Route path="/list" element={<List/>} />
-          <Route path="/order" element={<Order/>} />
-        
+          <Route path="/list" element={<List/>} />        
         </Routes>
       </div>
     </div>
