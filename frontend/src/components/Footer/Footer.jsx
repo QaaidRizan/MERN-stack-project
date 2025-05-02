@@ -36,15 +36,15 @@ const Footer = () => {
           <h3>Contact Us</h3>
           <div className="contact-item">
             <i className="fas fa-envelope"></i>
-            <p>Email: info@iandiautos.com</p>
+            <p>Email: info@i&iautos.com</p>
           </div>
           <div className="contact-item">
             <i className="fas fa-phone"></i>
-            <p>Phone: +1 (555) 123-4567</p>
+            <p>Phone: +94 75-262-2860</p>
           </div>
           <div className="contact-item">
             <i className="fas fa-map-marker-alt"></i>
-            <p>Address: 123 Auto Drive, Car City, CC 12345</p>
+            <p>Address: 11b kawudan broad way, Dehiwala</p>
           </div>
           <div className="contact-item">
             <i className="fas fa-clock"></i>
