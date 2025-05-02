@@ -13,7 +13,9 @@ const Footer = () => {
             service to our customers.
           </p>
           <div className="footer-social">
-            <a href="#" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
+            <a href="https://web.facebook.com/profile.php?id=61563936605070" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-facebook"></i>
+            </a>
             <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
             <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
             <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
