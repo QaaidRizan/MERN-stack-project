@@ -15,7 +15,7 @@ const PlaceOrder = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://server2-production-1aab.up.railway.app/api/products/${id}`);
+        const response = await axios.get(`https://splendid-upliftment-production-1cb8.up.railway.app/api/products/${id}`);
         if (response.data.success) {
           setProduct(response.data.product);
         } else {
