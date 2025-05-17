@@ -11,6 +11,7 @@ import Explore from './components/Explore/explore';
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [products, setProducts] = useState([]);
+  console.log("Products:", products);
 
   useEffect(() => {
     const fetchProducts = async () => {
