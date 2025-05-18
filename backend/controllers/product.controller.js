@@ -133,3 +133,42 @@ export const deleteProduct = async (req, res) => {
         res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
+
+// Search products
+export const searchProducts = async (req, res) => {
+    try {
+        const { q } = req.query;
+        
+        if (!q) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Search query is required" 
+            });
+        }
+        
+        // Create a regex for case-insensitive search
+        // This will match any product where the name or description contains the query string
+        const searchRegex = new RegExp(q, 'i');
+        
+        // Find products that match either name or description
+        const products = await Product.find({
+          $or: [
+            { name: searchRegex },
+            { description: searchRegex }
+          ]
+        });
+        
+        res.status(200).json({
+          success: true,
+          count: products.length,
+          products
+        });
+    } catch (error) {
+        console.error("Search error:", error);
+        res.status(500).json({ 
+          success: false, 
+          message: "Error searching products", 
+          error: error.message 
+        });
+    }
+};
