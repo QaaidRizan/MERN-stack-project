@@ -18,11 +18,27 @@ const SearchResults = () => {
       try {
         // Using the local endpoint instead of the remote one
         const response = await axios.get(`https://splendid-upliftment-production-1cb8.up.railway.app/api/products/search?q=${query}`);
-        console.log('Search response:', response.data);
+        
+        // Detailed console logging to examine the response structure
+        console.log('Full API response:', response);
+        console.log('Response data:', response.data);
+        
+        if (response.data.products && response.data.products.length > 0) {
+          response.data.products.forEach((product, idx) => {
+            console.log(`Product ${idx}:`, product);
+            console.log(`Product ${idx} _id:`, product._id);
+            console.log(`Product ${idx} id:`, product.id);
+          });
+        }
         
         if (response.data.success) {
-          setResults(response.data.products);
+          const mappedProducts = response.data.products.map(product => ({
+            ...product,
+            id: product._id || product.id // fallback to id if _id is missing
+          }));
+          setResults(mappedProducts);
         } else {
+          console.log('No success flag in response, setting empty results');
           setResults([]);
         }
         setError(null);
@@ -43,9 +59,24 @@ const SearchResults = () => {
     }
   }, [query]);
 
+  // Log what we're passing to Item component
+  useEffect(() => {
+    if (results.length > 0) {
+      console.log('Results being used for rendering:', results);
+      results.forEach((item, index) => {
+        console.log(`Item ${index} ID:`, item._id || item.id || 'MISSING ID');
+      });
+    }
+  }, [results]);
+
   // Navigate to car details page when a car is clicked
-  const handleCarClick = (id) => {
-    navigate(`/place-order/${id}`);
+  const handleCarClick = (item) => {
+    const productId = item.id || item._id;
+    if (!productId) {
+      console.error("No product ID found:", item);
+      return;
+    }
+    navigate(`/place-order/${productId}`);
   };
 
   if (loading) {
@@ -82,12 +113,12 @@ const SearchResults = () => {
         <div className="search-results-grid">
           {results.map((item) => (
             <div 
-              key={item._id} 
+              key={item.id} 
               className="search-result-item-wrapper"
-              onClick={() => handleCarClick(item._id)}
+              onClick={() => handleCarClick(item)} // Pass the whole item object
             >
               <Item
-                id={item._id}
+                id={item.id}
                 name={item.name}
                 description={item.description}
                 price={item.price}

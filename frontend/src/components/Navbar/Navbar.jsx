@@ -7,7 +7,7 @@ import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const { theme, toggleTheme } = useContext(ThemeContext);
   const location = useLocation();
@@ -118,10 +118,16 @@ const Navbar = () => {
         </a>
         <a
           href="#footer"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
-            scrollToSection('footer');
-            setMenu("contact-us");
+            if (location.pathname !== "/") {
+              navigate("/", { state: { scrollTo: "footer" } });
+              setMenu("contact-us");
+            } else {
+              const el = document.getElementById("footer");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+              setMenu("contact-us");
+            }
           }}
           className={menu === "contact-us" ? "active" : ""}
         >
@@ -162,9 +168,9 @@ const Navbar = () => {
                 <div className="search-results">
                   {searchResults.slice(0, 5).map(vehicle => (
                     <div 
-                      key={vehicle._id} 
+                      key={vehicle.id} 
                       className="search-result-item"
-                      onClick={() => handleResultClick(vehicle._id)}
+                      onClick={() => handleResultClick(vehicle.id)}
                     >
                       <div className="search-result-image">
                         <img 

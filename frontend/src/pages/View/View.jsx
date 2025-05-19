@@ -99,7 +99,7 @@ const PlaceOrder = () => {
             <div className="car-price-prominent">{formatPrice(product.price)}</div>
             
             <h3>{product.name}</h3>
-            <p className="description">{product.description}</p>
+            <p className="description" style={{ whiteSpace: 'pre-line' }}>{product.description}</p>
           </div>
         </div>
       ) : (
