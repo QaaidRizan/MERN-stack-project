@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Item from '../../components/Item/Item';
 import './SearchResults.css';
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const query = searchParams.get('q');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,10 @@ const SearchResults = () => {
     const fetchSearchResults = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://server2-production-1aab.up.railway.app/api/products/search?q=${query}`);
+        // Using the local endpoint instead of the remote one
+        const response = await axios.get(`https://splendid-upliftment-production-1cb8.up.railway.app/api/products/search?q=${query}`);
+        console.log('Search response:', response.data);
+        
         if (response.data.success) {
           setResults(response.data.products);
         } else {
@@ -38,6 +42,11 @@ const SearchResults = () => {
       setLoading(false);
     }
   }, [query]);
+
+  // Navigate to car details page when a car is clicked
+  const handleCarClick = (id) => {
+    navigate(`/place-order/${id}`);
+  };
 
   if (loading) {
     return (
@@ -72,7 +81,11 @@ const SearchResults = () => {
       {results.length > 0 ? (
         <div className="search-results-grid">
           {results.map((item) => (
-            <div key={item._id} className="search-result-item-wrapper">
+            <div 
+              key={item._id} 
+              className="search-result-item-wrapper"
+              onClick={() => handleCarClick(item._id)}
+            >
               <Item
                 id={item._id}
                 name={item.name}
@@ -91,7 +104,7 @@ const SearchResults = () => {
         <div className="no-results-found">
           <h3>No vehicles found matching "{query}"</h3>
           <p>Try using different keywords or browse our vehicle collection</p>
-          <button onClick={() => window.location.href = '/'}>
+          <button onClick={() => navigate('/')}>
             Browse All Vehicles
           </button>
         </div>

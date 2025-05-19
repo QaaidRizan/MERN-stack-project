@@ -60,7 +60,8 @@ const Navbar = () => {
     if (query.length > 2) {
       setIsSearching(true);
       try {
-        const response = await axios.get(`https://server2-production-1aab.up.railway.app/api/products/search?q=${query}`);
+        // Using the local endpoint
+        const response = await axios.get(`https://splendid-upliftment-production-1cb8.up.railway.app/api/products/search?q=${query}`);
         if (response.data.success) {
           setSearchResults(response.data.products);
         } else {
