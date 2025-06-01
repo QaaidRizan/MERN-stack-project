@@ -55,7 +55,7 @@ export default function Add() {
         });
 
         try {
-            const response = await fetch("https://splendid-upliftment-production-1cb8.up.railway.app/api/products", {
+            const response = await fetch("https://server2-ygy4.onrender.com/api/products", {
                 method: "POST",
                 body: formData,
             });

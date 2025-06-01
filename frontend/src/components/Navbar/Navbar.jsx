@@ -61,7 +61,7 @@ const Navbar = ({ setShowLogin }) => {
       setIsSearching(true);
       try {
         // Using the local endpoint
-        const response = await axios.get(`https://splendid-upliftment-production-1cb8.up.railway.app/api/products/search?q=${query}`);
+        const response = await axios.get(`https://server2-ygy4.onrender.com/api/products/search?q=${query}`);
         if (response.data.success) {
           setSearchResults(response.data.products);
         } else {

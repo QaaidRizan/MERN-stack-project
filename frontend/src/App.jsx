@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://server2-production-1aab.up.railway.app/api/products/");
+        const response = await axios.get("https://server2-ygy4.onrender.com/api/products/");
         setProducts(response.data.products || []);
       } catch (err) {
         console.error("Error fetching products:", err);
