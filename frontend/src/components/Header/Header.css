@@ -70,17 +70,16 @@
 
 .header {
   height: 100vh;
-  background: linear-gradient(var(--header-bg-gradient-start), var(--header-bg-gradient-end)),
-              url('../../assets/car.png');
-  background-size: 110% 110%;
-  background-position: center;
+  background: url('../../assets/car.png');
+  background-size: cover;              /* Make image responsive */
+  background-position: center center;   /* Center the image */
   background-repeat: no-repeat;
   background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: var(--text-color);
+  color: #fff; /* Ensure text is white */
   position: relative;
   overflow: hidden;
   will-change: transform;
@@ -89,6 +88,22 @@
   perspective: 1000px;
   animation: slowZoom 20s infinite alternate ease-in-out;
   transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Remove overlays and filters */
+.header::before,
+.header::after {
+  content: none !important;
+  background: none !important;
+}
+
+/* Optional: Make sure header-contents text is also white */
+.header-contents,
+.header-contents h1,
+.header-contents p,
+.header-contents .primary-button,
+.header-contents .secondary-button {
+  color: #fff !important;
 }
 
 @keyframes slowZoom {
@@ -106,17 +121,11 @@
   }
 }
 
-.header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, var(--header-overlay-gradient-start), var(--header-overlay-gradient-end));
-  z-index: 1;
-  animation: gradientShift 15s ease infinite alternate;
-  transition: background 0.5s ease;
+/* Remove the ::before and ::after pseudo-elements for the header */
+.header::before,
+.header::after {
+  content: none !important;
+  background: none !important;
 }
 
 /* Add floating particles effect */
@@ -380,6 +389,11 @@ html {
 }
 
 @media (max-width: 768px) {
+  .header {
+    height: 60vh;
+    background-attachment: scroll; /* Prevent issues on mobile */
+  }
+
   .header-contents h1 {
     font-size: 3.2rem;
     letter-spacing: -0.3px;

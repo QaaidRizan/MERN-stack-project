@@ -29,7 +29,7 @@ const CarDisplay = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://server2-ygy4.onrender.com/api/products/");
+        const response = await axios.get("http://54.255.10.62:3000/api/products/");
         if (response.data.success && Array.isArray(response.data.products)) {
           setProducts(response.data.products);
         } else {

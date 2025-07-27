@@ -6,7 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
-  const [backendURL] = useState("https://server2-ygy4.onrender.com/api/products/");
+  const [backendURL] = useState("http://54.255.10.62:3000/api/products/");
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
