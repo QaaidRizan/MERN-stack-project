@@ -55,7 +55,7 @@ export default function Add() {
         });
 
         try {
-            const response = await fetch("http://54.255.10.62:3000/api/products/", {
+            const response = await fetch("https://54.255.10.62:3000/api/products/", {
                 method: "POST",
                 body: formData,
             });
