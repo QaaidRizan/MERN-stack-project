@@ -14,7 +14,7 @@ export default function List() {
     const [images, setImages] = useState([null, null, null, null, null]);
     const [imagePreview, setImagePreview] = useState(null);
 
-    const API_BASE_URL = 'https://server2-ygy4.onrender.com/api/products';
+    const API_BASE_URL = 'http://54.255.10.62:3000/api/products/';
 
     const fetchProducts = async () => {
         try {
