@@ -15,7 +15,7 @@ const PlaceOrder = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://54.255.10.62:3000/api/products/${id}`);
+        const response = await axios.get(`https://54.255.10.62:3000/api/products/${id}`);
         if (response.data.success) {
           setProduct(response.data.product);
         } else {

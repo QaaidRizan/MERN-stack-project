@@ -17,8 +17,7 @@ const SearchResults = () => {
       setLoading(true);
       try {
         // Using the local endpoint instead of the remote one
-        const response = await axios.get(`https://server2-ygy4.onrender.com/api/products/search?q=${query}`);
-        
+        const response = await axios.get(`https://54.255.10.62:3000/api/products/search?q=${query}`);     
         // Detailed console logging to examine the response structure
         console.log('Full API response:', response);
         console.log('Response data:', response.data);
